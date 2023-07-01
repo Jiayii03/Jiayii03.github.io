@@ -22,17 +22,12 @@
         }
 
         $sql_run = $conn->query($sql);
-        if($_SERVER["REQUEST_METHOD"] == "POST" && $sql_run->num_rows == 0){ // if reservation ID not found (if no record found) when manually key in id
+        if($sql_run->num_rows == 0){ // if reservation ID not found (if no record found)
             $showNotFound = true;
-        }
-        elseif($sql_run->num_rows == 0 && isset($_GET["qrCode"])){ // if reservation ID not found when using qr code scanner
             $showNotFoundQR = true;
-            $showQRForm = true;
-        }
-        else{ // if reservation id found
-            $showInputForm = false;
-            $showQRForm = false;
-        }
+        } else
+        $showInputForm = false;
+        $showQRForm = false;
     }
       
 ?>
@@ -71,9 +66,6 @@
         </div>
 
         <div class="navLinks">
-            <div class="hyperlink2">
-                <a class="hyperlink2" href="../index.php">Index Page</a>
-            </div>
             <div class="hyperlink3">
                 <a class="hyperlink3" href="checkReservation.php">Check Reservation</a>
             </div>
